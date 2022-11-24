@@ -48,3 +48,24 @@ isSorted.[x] = True
 isSorted.(x :: y :: xs) = if x < y then isSorted.(y :: xs) else False
 
 -- function which takes 2 lists & returns the bigger one
+
+
+
+-- rotate halfs
+
+-- rotateOppSide.[1,2,3,4,5,6,7,8].8
+-- [2, 3, 4, 1, 6, 7, 8, 5] : [Int]
+-- rotateOppSide.[1,2,3,4,5,6,7,8,9].9
+-- [2, 3, 4, 1, 5, 7, 8, 9, 6] : [Int]
+
+
+split: [a] -> Int -> [[a]]
+split.(x :: y :: xs).1 = [[], x :: xs ++ [y]]
+split.(x :: xs).0 = [[], xs ++ [x]]
+split.(x :: xs).n = [x::head.(split.(xs).(n-2)), last.(split.(xs).(n-2))]
+
+rotateOnce : [a] -> [a]
+rotateOnce.(x :: xs) = xs ++ [x]
+
+rotateOppSide : [a] -> Int -> [a]
+rotateOppSide.x.n = rotateOnce.(head.(split.x.n)) ++ last.(split.x.n)
