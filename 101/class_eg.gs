@@ -37,4 +37,13 @@ isEven.[] = True
 isEven.[x] = False
 isEven.(x :: y :: xs) = isEven.xs
 
--- 
+-- join n lists
+joinLists : [[a]] -> [a]
+joinLists.[x] = x
+joinLists.(x :: xs) = x ++ joinLists.xs
+
+-- get slice of list from mth index & next k elements
+getSlice:[a]->Int->Int-> [a]
+getSlice.(x :: xs).1.(0) = []
+getSlice.(x :: xs).1.(k) = x :: getSlice.xs.1.(k -1 )
+getSlice.(x :: xs).m.(k) = getSlice.xs.(m-1).k
